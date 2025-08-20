@@ -1,23 +1,24 @@
-// 프로토타입
-// 만약 여러 객체들이 생성되어서 drive 함수를 참조한다고 했을때 비효율 적이기 때문에 프로토 타입을 사용함
+// 생성자 함수
 function Car(make, model, year) {
   // 멤버 속성
   this.make = make;
   this.model = model;
   this.year = year;
+  // 아래 메서드는 재정의됨
+  this.drive = function () {
+    console.log(this);
+  };
 }
 
+// 프로토타입에 메서드와 속성 추가
+Car.prototype.author = "kim"; // 모든 인스턴스가 공유
 Car.prototype.drive = function () {
-  return `모델명 : ${this.model}, 제조사 : ${this.make}`;
+  return `${this.make}, ${this.model}, ${this.year}`;
 };
 
-const car1 = new Car("제네시스", "현대", 2023);
-const car2 = new Car("쏘나타", "현대", 2021);
-const car3 = new Car("아반떼", "현대", 2022);
+const car1 = new Car("현대", "제네시스", 2025);
+const car2 = new Car("현대", "쏘나타", 2025);
+const car3 = new Car("현대", "아반떼", 2025);
 
-// dir 객체의 속성을 계층적으로 출력해주는 매서드
 console.dir(car1);
-console.dir(car2);
-console.dir(car3);
-
-console.log(car1.drive());
+console.log(car1.drive()); // 프로토타입 메서드 호출

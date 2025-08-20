@@ -1,23 +1,51 @@
-// 2.1 상속?
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
+// 1. 상속 예시: Apliance → WashingMachine
+function Apliance(powerOn) {
+  this.powerOn = !!powerOn;
 }
-Person.prototype.getInfo = function () {
-  return `${this.name}, ${this.age}`;
+
+Apliance.prototype.toggle = function () {
+  this.powerOn = !this.powerOn;
+  return this.powerOn;
 };
 
-function Developer(name, age, skill) {
-  this.name = name;
-  this.age = age;
-  this.skill = skill;
+function WashingMachine(powerOn, mode) {
+  Apliance.call(this, powerOn);
+  this.mode = mode || "normal";
 }
 
-// Person.prototype 참조해서 새로운 객체를 만들겠다.
-// const newObject = Object.create(Person.prototype)
-Developer.prototype = Object.create(Person.prototype);
-Developer.prototype.constructor = Developer;
+WashingMachine.prototype = Object.create(Apliance.prototype);
+WashingMachine.prototype.constructor = WashingMachine;
 
-const dev1 = new Developer("kim", 20, "javascript");
-console.dir(dev1.getInfo());
-console.dir(dev1.hasOwnProperty("name"));
+WashingMachine.prototype.wash = function () {
+  if (!this.powerOn) return `Cannot wash: power off`;
+  return `Washing ...${this.mode}`;
+};
+
+const wm = new WashingMachine(false, "quick");
+console.log(wm.wash());
+console.log(wm.toggle());
+console.log(wm.wash());
+
+// 2. 캡슐화 예시: 프라이빗 변수 (클로저 활용)
+function Counter(num = 0) {
+  let count = num;
+  this.increment = function () {
+    count++;
+    return count;
+  };
+  this.decrement = function () {
+    count--;
+    return count;
+  };
+  this.getCount = function () {
+    return count;
+  };
+}
+
+const ct = new Counter(0);
+ct.increment();
+ct.increment();
+console.log(ct.getCount());
+
+ct.count = 100; // 외부 조작 시도 (실패)
+console.log(ct.getCount());
