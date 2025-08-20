@@ -1,17 +1,18 @@
-// Q1
+// 1
 function createCounter() {
-  let counter = 0;
+  let count = 0;
   return function () {
-    counter++;
-    return counter;
+    return ++count;
   };
 }
-const counter = createCounter();
+
+let counter = createCounter();
 console.log(counter()); // 1
 console.log(counter()); // 2
 console.log(counter()); // 3
+counter = null;
 
-// Q2
+// 2. 제곱 캐싱
 function square() {
   const cache = {};
   return function (num) {
@@ -20,69 +21,72 @@ function square() {
     return cache[num];
   };
 }
-const squared = square();
+let squared = square();
 console.log(squared(4)); // 16
 console.log(squared(4)); // 16 (캐시 사용)
 console.log(squared(5)); // 25
+squared = null;
 
-// Q3
+// 3. 지연 실행
 function delayExecution(ms) {
+  var ms = ms;
   return function (callback) {
     setTimeout(callback, ms);
   };
 }
-const delayedFunc = delayExecution(1000);
+let delayedFunc = delayExecution(1000);
 delayedFunc(() => console.log("Executed after 1 second"));
+delayedFunc = null;
 
-// Q4
+// 4. ID 생성기
 function createIdGenerator() {
   let id = 0;
-  return function () {
-    id++;
-    return id;
-  };
+  return () => ++id;
 }
-const getId = createIdGenerator();
+let getId = createIdGenerator();
 console.log(getId()); // 1
 console.log(getId()); // 2
 console.log(getId()); // 3
+getId = null;
 
+// 5. 피보나치 (메모이제이션)
 function fibonacci() {
-  const cache = {}; // 결과 저장소
+  const cache = {};
   function fib(n) {
-    // 이미 계산한 값이 있으면 즉시 반환
-    if (n in cache) return cache[n];
-    // 피보나치 기본값
     if (n <= 1) return n;
-    // 재귀 계산 + 저장
-    const result = fib(n - 1) + fib(n - 2);
-    cache[n] = result;
-    return result;
+    if (cache[n]) return cache[n];
+    cache[n] = fib(n - 1) + fib(n - 2);
+    return cache[n];
   }
   return fib;
 }
-const fibo = fibonacci();
-console.log(fibo(10)); // 55 (계산 수행)
-console.log(fibo(10)); // 55 (캐시에서 즉시 반환)
-console.log(fibo(15)); // 610 (계산 + 일부는 캐시 활용)
+let fibo = fibonacci();
+console.log(fibo(100));
+console.log(Number.MAX_SAFE_INTEGER);
+fibo = null;
 
-// Q6
+// 6. 문자열 결합기
 function createStringCombiner() {
-  let result = "";
-  return function (str) {
-    result += str;
-    return result;
+  let str = "";
+  return function (text) {
+    str += text;
+    return str;
   };
 }
-const combiner = createStringCombiner();
+let combiner = createStringCombiner();
 console.log(combiner("Hello")); // "Hello"
 console.log(combiner(" World")); // "Hello World"
+combiner = null;
 
-// Q7
+// 7. 객체 프로퍼티 개수 세기
 function createPropertyCounter() {
-  let count = 0;
+  let storeObj = null;
   return function (obj) {
-    count = Object.keys(obj).length;
+    storeObj = obj;
+    let count = 0;
+    for (let key in storeObj) {
+      count++;
+    }
     return count;
   };
 }
@@ -90,39 +94,40 @@ const counter2 = createPropertyCounter();
 console.log(counter2({ a: 1, b: 2 })); // 2
 console.log(counter2({ a: 1 })); // 1
 
-// Q8
+// 8. 배열 필터
 function createFilter(condition) {
-  return function (arr) {
-    return arr.filter(condition);
+  return function (array) {
+    const result = [];
+    for (const item of array) {
+      if (condition(item)) result.push(item);
+    }
+    return result;
   };
 }
 const filterEven = createFilter((num) => num % 2 === 0);
 console.log(filterEven([1, 2, 3, 4, 5])); // [2, 4]
 
-// Q9
+// 9. 여러 카운터
 function createMultiCounter() {
   const counters = {};
-
   return function (name) {
-    if (!counters[name]) {
-      counters[name] = 0;
-    }
+    if (!counters[name]) counters[name] = 0;
     return function () {
       counters[name]++;
       return counters[name];
     };
   };
 }
-const counters = createMultiCounter();
-const counterA = counters("A");
-const counterB = counters("B");
+let counters = createMultiCounter();
+let counterA = counters("A");
+let counterB = counters("B");
 console.log(counterA()); // 1
 console.log(counterA()); // 2
 console.log(counterB()); // 1
 console.log(counterA()); // 3
 console.log(counterB()); // 2
 
-// Q10
+// 10. 계산기
 function createCalculator(operator) {
   return function (a, b) {
     return operator(a, b);
@@ -131,6 +136,7 @@ function createCalculator(operator) {
 const add = createCalculator((a, b) => a + b);
 console.log(add(2, 3)); // 5
 console.log(add(10, 5)); // 15
+
 const multiply = createCalculator((a, b) => a * b);
 console.log(multiply(2, 3)); // 6
 console.log(multiply(10, 5)); // 50

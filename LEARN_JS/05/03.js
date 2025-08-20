@@ -1,28 +1,98 @@
-// 객체 메서드와 this
-// 메서드 : 객체 프로퍼티 값이 함수인 경우
-// this 키워드 : 메서드가 호출될 때 해당 메서드를 소유한 객체를 가리킴
+// 03_함수와 일급 객체.js
+// ---------------------------------------------
+//  함수와 일급 객체
+// - 자바스크립트에서 함수는 "일급 객체(first-class citizen)"
+// - 즉, 함수도 하나의 값으로 취급되어 변수에 담기거나, 인자로 전달되거나,
+//   반환값이 될 수 있으며, 프로퍼티를 가질 수도 있음
+// ---------------------------------------------
 
-// 메서드 정의 방법
-// 1. 객체 리터럴에서 메서드
-const person = {
-  name: "John",
-  greet() {
-    console.log(`Hello, I'm ${this.name}`);
-  },
+// 1. 함수 생성 방법
+// ---------------------------------------------
+
+// (1) 함수 선언식
+function greet1() {
+  console.log("Hello (Declaration)");
+}
+greet1();
+
+// (2) 함수 표현식
+const greet2 = function () {
+  console.log("Hello (Expression)");
 };
-person.greet(); // Hello, I'm John
+greet2();
 
-// 2. 생성자 함수에서 메서드
-function User(name) {
-  this.name = name;
-  this.sayHi = function () {
-    console.log(`Hi, I'm ${this.name}`);
+// (3) 화살표 함수
+const greet3 = () => console.log("Hello (Arrow Function)");
+greet3();
+
+// ---------------------------------------------
+// 2. 일급 객체로서의 함수 특징
+// ---------------------------------------------
+
+// (1) 변수나 데이터 구조에 담을 수 있다
+const sayHello = function () {
+  console.log("Hello, World");
+};
+sayHello();
+
+// (2) 함수의 인자로 전달할 수 있다
+function greet(fn) {
+  fn(); // 전달받은 함수 실행
+}
+greet(sayHello);
+
+// (3) 함수의 반환값으로 사용할 수 있다
+function multiplier(factor) {
+  return function (num) {
+    return num * factor;
   };
 }
-const u1 = new User("Alice");
-u1.sayHi(); // Hi, I'm Alice
+const double = multiplier(2);
+console.log(double(5)); // 10
 
-// this 동작 방식
-// 일반 함수 호출 : this는 전역 객체 (window 또는 global)
-// 메서드 호출 : this는 해당 메서드를 소유한 객체
-// 화살표 함수 : this를 정의된 위치의 상위 스코프에서 가져옴
+// (4) 런타임에 생성할 수 있다
+// - new Function 구문 사용 (잘 쓰진 않음)
+const dynamicFn = new Function("a", "b", "return a + b");
+console.log(dynamicFn(3, 4)); // 7
+
+// (5) 프로퍼티를 가질 수 있다
+sayHello.lang = "korean";
+console.log(sayHello.lang); // korean
+
+// ---------------------------------------------
+// 3. 연습 예제
+// ---------------------------------------------
+
+// calculator : 콜백 함수 실행
+function calculator(callback) {
+  console.log(callback(10, 20));
+}
+calculator((a, b) => a + b); // 30
+calculator((a, b) => a - b); // -10
+
+// stringProcessor : 문자열 가공
+function stringProcessor(callback) {
+  const text = "JavaScript";
+  console.log(callback(text));
+}
+stringProcessor((str) => str.toUpperCase()); // JAVASCRIPT
+stringProcessor((str) => str.length); // 10
+
+// run : 함수 인자로 전달
+function run(op) {
+  console.log(op(5, 7));
+}
+
+function add(a, b) {
+  return a + b;
+}
+run(add); // 12
+run(function (a, b) {
+  return a * b;
+}); // 35
+run((a, b) => Math.max(a, b)); // 7
+
+// ---------------------------------------------
+// ✅ 요약
+// - 함수는 "값"처럼 다룰 수 있다 (저장, 전달, 반환, 생성, 속성 보유)
+// - 이 때문에 자바스크립트에서는 고차 함수(Higher-Order Function) 구현 가능

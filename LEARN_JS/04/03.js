@@ -1,41 +1,26 @@
-/*
-function sayHello() {
-  console.log("Hello, 함수 선언식!");
-}
-sayHello();
+// 03.js - 함수 기본
+// -----------------------------------------------------------
 
-const greet = function greet() {
-  console.log("Hello, 함수 표현식!");
-};
+// 함수 선언식
+function greet() {
+  console.log("greet");
+}
 greet();
 
-const add = (a, b) => {
-  return a + b;
+// 함수 표현식 (네이밍 함수)
+const hello = function hello() {
+  console.log("hello");
 };
-console.log(add(3, 7));
+hello();
 
-const age = (a) => {
-  //매개변수
-  if (a >= 20) return "성인입니다.";
-  else return "미성년자입니다.";
+// 익명 함수
+const afternoon = function () {
+  console.log("afternoon");
 };
-console.log(age(25));
-console.log(age(19));
-//인자, 인수
+afternoon();
 
-(() => {
-  console.log("나는 즉시 실행됨!");
-})();
-
-function sum(num1, num2) {
-  return a + b;
-}
-const res = add(3, 7);
-console.log(res);
-*/
-
-const result = function (num1, num2) {
-  return num1 + num2;
+// 화살표 함수
+const arrFunc = () => {
+  console.log("arrow function");
 };
-const sum = result(10, 20);
-console.log(sum);
+arrFunc();

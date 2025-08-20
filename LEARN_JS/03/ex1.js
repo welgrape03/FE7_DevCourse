@@ -1,50 +1,102 @@
-// 연습문제 1
-let a = true;
-let b = false;
+// 1. 학점 계산기
+const score = 100;
+let grade = "";
+if (score >= 90) grade = "A";
+else if (score >= 80) grade = "B";
+else if (score >= 70) grade = "C";
+else if (score >= 60) grade = "D";
+else grade = "F";
+console.log(grade);
 
-console.log(a && b); // false
-console.log(a || b); // true
-console.log(!a); // false
+// 2. 짝수와 홀수 판별
+let num = 30;
+console.log(num % 2 == 0 ? "Even" : "Odd");
 
-console.log("------------------");
-
-// 연습문제 2
-let x = 5;
-let y = 10;
-let z = 15;
-console.log(x > 10 && y < 5);
-console.log(x > 10 || z > 30);
-console.log(y !== 0);
-
-console.log("------------------");
-
-// 연습문제 3
+// 3. 로그인 확인 및 권한 부여
 let isLoggedIn = true;
-let isAdmin = false;
-console.log(isLoggedIn ? "Welcome" : "please log in");
-console.log(isAdmin ? "Admin access granted" : "Admin access denied");
+let isAdmin = true;
+if (isLoggedIn) {
+  if (isAdmin) console.log("Welcome,admin!");
+  else console.log("Access denied");
+} else console.log("Please log in");
+
+// 4. 숫자 크기 비교
+let a = 10;
+let b = 200;
 console.log(
-  isLoggedIn && isAdmin ? "Full access granted" : "Restricted access"
+  a > b ? "a is greater" : a === b ? "a and b are equal" : "b is greater"
 );
 
-console.log("------------------");
+// 5. 월별 계절 판별
+const month = 12;
+switch (month) {
+  case 12:
+  case 1:
+  case 2:
+    console.log("winter");
+    break;
+  case 3:
+  case 4:
+  case 5:
+    console.log("spring");
+    break;
+  case 6:
+  case 7:
+  case 8:
+    console.log("summer");
+    break;
+  case 9:
+  case 10:
+  case 11:
+    console.log("fall");
+    break;
+  default:
+    console.log("Invalid Month");
+    break;
+}
 
-// 연습문제 4
-let value1 = null;
-let value2 = "Hello";
-console.log(value1 || value2 ? "값이 존재함" : "값이 존재하지 않음");
-console.log(!value1 && !value2 ? "값이 존재하지 않음" : "값이 하나라도 존재함");
+// 6. 할인률 계산
+const amount = 200000;
+let discount;
+if (amount >= 100000) {
+  discount = 0.2;
+} else if (amount >= 50000) {
+  discount = 0.1;
+} else discount = 0;
 
-console.log("------------------");
-// 연습문제 5
-let num = 23;
-console.log(
-  num >= 0 && num <= 100
-    ? "0 이상이며 100 이하입니다"
-    : "0 이상이 아니거나 100 이하가 아닙니다"
-);
-console.log(
-  num < 0 || num > 100
-    ? "0 미만이거나 100 초과입니다"
-    : "0 미만이 아니거나 100 초과가 아닙니다"
-);
+const finalamount = amount - amount * discount;
+console.log(finalamount);
+
+// 7. 숫자를 입력받아 해당 요일 출력
+const day = 7;
+switch (day) {
+  case 1:
+    console.log("월요일");
+    break;
+  case 2:
+    console.log("화요일");
+    break;
+  case 3:
+    console.log("수요일");
+    break;
+  case 4:
+    console.log("목요일");
+    break;
+  case 5:
+    console.log("금요일");
+    break;
+  case 6:
+    console.log("토요일");
+    break;
+  case 7:
+    console.log("일요일");
+    break;
+  default:
+    console.log("잘못된 입력");
+}
+
+// 8. 양수, 음수, 0 판단
+const num3 = 10;
+if (num3 > 0) console.log("양수");
+else if (num3 === 0) console.log("0");
+else console.log("음수");

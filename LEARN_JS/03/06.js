@@ -1,15 +1,18 @@
-// if -> 표현식으로 조건을 처리할 때 사용
-// switch -> 여러 조건을 처리할 때 사용
-// switch, case, break, default
+// 06.js - switch문 활용
+// -----------------------------------------------------------
 
-const fruit = "apple";
-switch (fruit) {
-  case "apple":
-    console.log("사과입니다.");
+const day = "토요일";
+
+switch (day) {
+  case "토요일":
+  case "일요일":
+    console.log("주말입니다.");
     break;
-  case "banana":
-    console.log("바나나입니다.");
-  case "orange":
-    console.log("오렌지입니다.");
+  case "월요일":
+  case "화요일":
+  case "수요일":
+  case "목요일":
+  case "금요일":
+    console.log("평일입니다.");
     break;
 }

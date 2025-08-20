@@ -1,14 +1,15 @@
-const day = "토요일";
-switch (day) {
-  case "토요일":
-  case "일요일":
-    console.log("주말입니다.");
-    break;
-  case "월요일":
-  case "화요일":
-  case "수요일":
-  case "목요일":
-  case "금요일":
-    console.log("평일입니다.");
-    break;
+// 07.js - while, break, continue
+// -----------------------------------------------------------
+
+let i = 0;
+while (i <= 9) {
+  i++;
+  if (i === 4) break;
+  if (i === 5) break;
+  // if (i % 2 === 1) continue;
+  console.log(i);
 }
+
+// do {
+//   console.log(i++);
+// } while (i <= 9);

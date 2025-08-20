@@ -1,25 +1,62 @@
-// 01
-const x = 10;
-const y = 20;
-const sum = x + y;
-
-console.log(sum);
-
-// 02
-let name = "Alice";
-name = "Bob";
-console.log(name);
-
-// 03
-const PI = 3.14;
-console.log(PI);
-
-// 04
-let a = 5;
-let b = 10;
-
-let temp = a;
-a = b;
-b = temp;
-
-console.log("a:", a, "b:", b);
+// 00.js - JavaScript 역사 및 ECMAScript 표준 변천사
+// -----------------------------------------------------------
+//  JavaScript의 역사
+// -----------------------------------------------------------
+// 1993 : Mosaic 웹 브라우저 출시 (Marc Andreessen, 대학 시절 개발)
+// 1994 : Netscape 설립, Netscape Navigator 출시
+// 1994.9 : Brendan Eich가 Netscape에서 "Mocha"라는 스크립트 언어 개발 (단 10일 만에 완성)
+//          이후 이름이 "LiveScript" → "JavaScript"로 변경됨
+// 1995 : Sun Microsystems의 Java 언어와의 마케팅 전략으로 이름을 JavaScript로 확정
+// 1995 : Microsoft, Internet Explorer(IE) 출시
+//        → Netscape를 분석(reverse engineering)하여 'JScript'라는 호환 언어를 만듦
+//
+// Netscape vs Internet Explorer : 브라우저 전쟁의 시작
+//
+// -----------------------------------------------------------
+//  ECMAScript 표준화
+// -----------------------------------------------------------
+// 1996.11 : Ecma International (표준화 기구)에서 표준 제정 추진
+// 1997.07 : ECMAScript 1 (ES1) 표준 제정
+// 1998    : ECMAScript 2 (ES2)
+// 1999    : ECMAScript 3 (ES3)
+// 2000    : ECMAScript 4 (ES4, 보류됨)
+//           당시 IE가 표준을 따르지 않겠다고 선언 → 넷스케이프 몰락
+//           시장 점유율: 넷스케이프 10% 이하 (유료 브라우저) vs IE 90% (무료, 윈도우 번들)
+//
+// -----------------------------------------------------------
+//  암흑기 (2000 ~ 2009)
+// -----------------------------------------------------------
+// - IE 독점 시기, 표준과 무관하게 동작
+// - 개발자들은 브라우저마다 다른 동작 때문에 큰 고통을 겪음
+// - 이 시기에 나온 해결책: "jQuery (2006)"
+//   → 다양한 브라우저에서 동일하게 동작하도록 만든 라이브러리
+//
+// 2004 : Firefox 출시 (ActionScript/Tamarin 기반)
+// 2006 : jQuery 등장 → 개발자 생산성을 크게 향상
+// 2008 : Google Chrome 출시, V8 엔진 탑재
+//        → 자바스크립트 속도를 기존 대비 5배 이상 향상
+//
+// -----------------------------------------------------------
+//  ECMAScript 최신 표준
+// -----------------------------------------------------------
+// 2009 : ES5 (ECMAScript 5) - 엄격 모드(strict mode), JSON 지원
+// 2015 : ES6 (ECMAScript 2015) - 대규모 업데이트
+//        → let/const, 화살표 함수, 클래스, 모듈, 템플릿 리터럴 등
+// 이후 매년 새로운 버전이 나옴
+//
+// ES7 (2016)   → includes, 지수 연산자(**)
+// ES8 (2017)   → async/await
+// ES9 (2018)   → Rest/Spread 개선, 비동기 반복
+// ES10 (2019)  → Array.flat, Object.fromEntries
+// ES11 (2020)  → BigInt, Null 병합 연산자(??)
+// ES12 (2021)  → String.replaceAll()
+// ES13 (2022)  → Top-level await
+// ES14 (2023)  → 새로운 메서드 추가
+// ES15 (2024)
+// ES16 (2025, 예정)
+//
+// -----------------------------------------------------------
+// ✅ 요약
+// - JavaScript는 1995년 Netscape에서 시작
+// - 브라우저 전쟁, IE 독점, jQuery, Chrome V8을 거쳐 발전
+// - 매년 ECMAScript 표준(ES6 이후 매년 업데이트)으로 발전 중
